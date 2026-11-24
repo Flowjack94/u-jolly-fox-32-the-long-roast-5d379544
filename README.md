@@ -19,4 +19,13 @@ python3 main.py
 
 Stdlib only, no network. `main.py` validates the entry (1–200 characters,
 non-whitespace, single line, clean UTF-8) before writing, then reads it back
-and prints its sha256.
+and prints its sha256. The written bytes are checked against a pinned digest,
+so any accidental change to the entry fails loudly instead of silently
+shipping a different line.
+
+Run the self-test (writer twice, byte-identical output, plus 8 negative
+validator cases) with:
+
+```sh
+python3 main.py --self-test
+```
